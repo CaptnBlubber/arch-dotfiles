@@ -3,20 +3,24 @@ monitor = ${env:MONITOR:HDMI-0}
 width = 100%
 height = 34
 
-background = #cc000000
+background = #ff000000
 foreground = #ccffffff
 
-line-color = ${bar/bottom.background}
+line-color = ${bar/top.background}
 line-size = 16
 
 spacing = 2
 padding-right = 5
 module-margin = 4
 
-font-0 = "SauceCodePro Nerd Font:pixelsize=12;0"
+font-0 = "Hack Nerd Font:pixelsize=12;0"
+font-1 = MaterialIcons:size=10;0
+font-2 = Termsynu:size=8:antialias=false;-2
+font-3 = FontAwesome:size=10;0
 
-modules-left = powermenu mpd
-modules-right = filesystem backlight wireless-network wired-network battery date
+modules-left = powermenu
+modules-center = title
+modules-right = filesystem volume battery date
 
 [bar/bottom]
 monitor = ${env:MONITOR:HDMI-0}
@@ -35,29 +39,15 @@ padding-right = 4
 module-margin-left = 0
 module-margin-right = 6
 
-font-0 = "SauceCodePro Nerd Font:pixelsize=12;0"
+font-0 = "Hack Nerd Font:pixelsize=12;0"
+font-1 = unifont:size=6;-3
+font-2 = FontAwesome:size=8;-2
+font-3 = NotoSans-Regular:size=8;-1
+font-4 = MaterialIcons:size=10;-1
+font-5 = Termsynu:size=8:antialias=false;0
 
-modules-left = bspwm i3
-modules-right = cpu memory
-
-[module/backlight]
-type = internal/xbacklight
-format = <ramp> <bar>
-
-ramp-0 =  
-ramp-1 = 
-ramp-2 = 
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-font = 3
-bar-indicator-foreground = #ff
-bar-fill = ─
-bar-fill-font = 3
-bar-fill-foreground = #c9665e
-bar-empty = ─
-bar-empty-font = 3
-bar-empty-foreground = #44
+modules-left = i3
+modules-right = playerctl cpu memory temperature wireless-network
 
 [module/battery]
 type = internal/battery
@@ -91,6 +81,69 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-framerate = 750
 
+
+[module/title]
+type = internal/xwindow
+
+format = <label>
+format-background = ${bar/top.background}
+format-foreground = ${bar/top.foreground}
+format-padding = 4
+
+label = %title%
+label-maxlen = 90
+
+label-empty = No Active Window
+label-empty-foreground = #707880
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = false
+index-sort = true
+enable-click = true
+enable-scroll = false
+wrapping-scroll = false
+fuzzy-match = false
+show-all = true
+
+ws-icon-0 = 0;  
+ws-icon-1 = www;   
+ws-icon-2 = terminal;   
+ws-icon-3 = code;  
+ws-icon-4 = chat;  
+ws-icon-5 = music;  
+ws-icon-default =  :
+
+format = <label-state> <label-mode>
+
+label-active-font = 2
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = #407055
+
+label-empty-foreground = ${colors.foreground-alt}
+label-empty = %icon%
+
+label-focused = %icon% %name%
+label-focused-foreground = #F3E5DA
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 4
+
+label-unfocused = %icon% %name%
+label-unfocused-padding = 2
+
+label-visible = %icon%
+label-visible-underline = #555555
+label-visible-padding = 2
+
+label-urgent = %icon%/
+label-urgent-foreground = #B7A439
+label-urgent-background =  #232323
+label-urgent-padding = 2
+
 [module/cpu]
 type = internal/cpu
 interval = 0.5
@@ -122,75 +175,75 @@ ramp-coreload-7 = █
 ramp-coreload-7-font = 2
 ramp-coreload-7-foreground = #ff5555
 
-[module/filesystem]
-type = internal/fs
-
-; Mountpoints to display
-mount-0 = /
-
-; Seconds to sleep between updates
-; Default: 30
-interval = 10
-
-; Display fixed precision values
-; Default: false
-fixed-values = true
-
-label-mounted = %mountpoint%: %percentage_used%% free: %free%
-
-; Spacing between entries
-; Default: 2
-spacing = 4
-
-[module/i3]
-type = internal/i3
-
-pin-workspaces = false
-strip-wsnumbers = true 
-index-sort = true
-enable-click = false
-enable-scroll = false
-wrapping-scroll = false
-fuzzy-match = true
-
-ws-icon-0 = 0;
-ws-icon-1 = terminal;
-ws-icon-2 = www;
-ws-icon-3 = code;
-ws-icon-4 = music;
-ws-icon-5 = chat;
-ws-icon-default = 
-
-format = <label-state> <label-mode>
-
-label-active-font = 2
-
-label-mode = %mode%
-label-mode-padding = 2
-label-mode-background = #407055
-
-label-focused = %icon% %name% 
-label-focused-foreground = #F3E5DA
-label-focused-background = #3f3f3f
-label-focused-underline = #fba922
-label-focused-padding = 4
-
-label-unfocused = %icon% %name% 
-label-unfocused-padding = 2
-
-label-visible = %icon%
-label-visible-underline = #555555
-label-visible-padding = 2
-
-label-urgent = %icon%
-label-urgent-foreground = #B7A439
-label-urgent-background =  #232323
-label-urgent-padding = 2
-
 [module/date]
 type = internal/date
-date =   %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+date =  %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
 date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+
+[module/temperature]
+type = internal/temperature
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Thermal zone to use
+; To list all the zone types, run 
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
+
+; Base temperature for where to start the ramp (in degrees celsius)
+; Default: 0
+base-temperature = 20
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 60
+
+; Whether or not to show units next to the temperature tokens (°C, °F)
+; Default: true
+units = true
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+format = <ramp> <label>
+
+; Available tags:
+;   <label-warn> (default)
+;   <ramp>
+format-warn = <ramp> <label-warn>
+
+; Available tokens:
+;   %temperature% (deprecated)
+;   %temperature-c%   (default, temperature in °C)
+;   %temperature-f%   (temperature in °F)
+label = %temperature-c%
+
+; Available tokens:
+;   %temperature% (deprecated)
+;   %temperature-c%   (default, temperature in °C)
+;   %temperature-f%   (temperature in °F)
+label-warn = !! %temperature-c% !!
+label-warn-foreground = #f00
+
+; Requires the <ramp> tag
+; The icon selection will range from `base-temperature` to `warn-temperature`,
+; temperatures at and above `warn-temperature` will use the last icon
+; and temperatures at and below `base-temperature` will use `ramp-0`. 
+; All other icons are distributed evenly between the two temperatures.
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
 
 [module/memory]
 type = internal/memory
@@ -211,92 +264,99 @@ bar-used-empty = ─
 bar-used-empty-font = 6
 bar-used-empty-foreground = #444444
 
-#[module/mpd]
-#type = internal/mpd
-#format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
-
-#icon-play = 
-#icon-pause = 
-#icon-stop = 
-#icon-prev = 玲
-#icon-next = 怜
-#icon-random = 
-#icon-repeat = 
-
-#toggle-on-foreground =
-#toggle-off-foreground = #55
-
-#bar-progress-width = 45
-#bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
-#bar-progress-indicator = |
-#bar-progress-indicator-foreground = #ff
-#bar-progress-indicator-font = 3
-#bar-progress-fill = ─
-#bar-progress-fill-foreground = #bb
-#bar-progress-fill-font = 3
-#bar-progress-empty = ─
-#bar-progress-empty-font = 3
-#bar-progress-empty-foreground = #44
-
 [module/wireless-network]
 type = internal/network
 interface = wlp2s0
 interval = 3.0
 ping-interval = 10
+accumulate-stats = true
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = %essid%
-label-disconnected =  睊  not connected
+format-disconnected = <label-disconnected>
+format-packetloss = <animation-packetloss> <label-connected>
+
+ramp-signal-0 = 直 罹
+ramp-signal-1 = 直 
+ramp-signal-2 = 直 𥉉
+ramp-signal-3 = 直 
+ramp-signal-4 = 直 
+
+label-connected = %signal%% <<%essid%>> |  %downspeed:9% %upspeed:9% | %local_ip%
+label-disconnected = 睊   not connected
 label-disconnected-foreground = #66
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
+; Default: (none)
+label-packetloss = %essid%
+label-packetloss-foreground = #eefafafa
 
-animation-packetloss-0 = 
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
 animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 
+animation-packetloss-1 = 📶
 animation-packetloss-1-foreground = ${bar/top.foreground}
+; Framerate in milliseconds
 animation-packetloss-framerate = 500
 
-[module/wired-network]
-type = internal/network
-interface = net0
-interval = 3.0
-
-label-connected =    %{T3}%local_ip%%{T-}
-label-disconnected-foreground = #66
-
 [module/volume]
-type = internal/volume
-speaker-mixer = Speaker
-headphone-mixer = Headphone
-headphone-id = 9
+type = internal/pulseaudio
+
+use-ui-max = true
+interval = 5
 
 format-volume = <ramp-volume> <label-volume>
-label-muted = ﱝ  muted
-label-muted-foreground = #66
 
-ramp-volume-0 = 
-ramp-volume-1 = 
+format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+label-volume = %percentage%% | %decibels% dB
+
+label-muted = 婢 muted
+label-muted-foreground = #666
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 墳
 ramp-volume-2 = 
+
+[module/filesystem]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /
+
+; Seconds to sleep between updates
+; Default: 30
+interval = 10
+
+; Display fixed precision values
+; Default: false
+fixed-values = true
+
+; Spacing between entries
+; Default: 2
+spacing = 4
+
+format-mounted = <label-mounted>
+label-mounted =   %percentage_used%% | %free% remaining
 
 [module/powermenu]
 type = custom/menu
 
 format-padding = 5
 
-label-open = 
-label-close =  
+label-open = 襤
+label-close = 拉
 
-menu-0-0 = Terminate WM
+menu-0-0 = Restart i3
 menu-0-0-foreground = #fba922
-menu-0-0-exec = bspc quit -1
+menu-0-0-exec = i3-msg restart
+
 menu-0-1 = Reboot
 menu-0-1-foreground = #fba922
 menu-0-1-exec = menu_open-1
+
 menu-0-2 = Power off
 menu-0-2-foreground = #fba922
 menu-0-2-exec = menu_open-2
@@ -304,6 +364,7 @@ menu-0-2-exec = menu_open-2
 menu-1-0 = Cancel
 menu-1-0-foreground = #fba922
 menu-1-0-exec = menu_open-0
+
 menu-1-1 = Reboot
 menu-1-1-foreground = #fba922
 menu-1-1-exec = sudo reboot
@@ -311,6 +372,7 @@ menu-1-1-exec = sudo reboot
 menu-2-0 = Power off
 menu-2-0-foreground = #fba922
 menu-2-0-exec = sudo poweroff
+
 menu-2-1 = Cancel
 menu-2-1-foreground = #fba922
 menu-2-1-exec = menu_open-0
@@ -319,3 +381,9 @@ menu-2-1-exec = menu_open-0
 type = internal/date
 interval = 2
 date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+[module/playerctl]
+type = custom/script
+interval = 2
+exec = echo $(playerctl metadata -f '{{artist}} - {{title}}' 2>/dev/null | sed -E 's/(.{60}).+/\1.../') %{A1:playerctl previous:}玲%{A} %{A1:playerctl play-pause:}$(playerctl status 2>/dev/null | grep Playing >/dev/null && echo '' || echo '契')%{A} %{A1:playerctl next:}怜%{A}
+exec-if = playerctl metadata -f {{playerName}} 2>/dev/null | grep -v mopidy >/dev/null

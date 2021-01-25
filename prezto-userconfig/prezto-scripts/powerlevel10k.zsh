@@ -1,6 +1,9 @@
-  # Font mode for powerlevel9k
-POWERLEVEL9K_MODE="nerdfont-complete"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Prompt settings
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context root_inidicator dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status battery ip docker_machine time)
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

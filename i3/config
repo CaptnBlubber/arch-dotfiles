@@ -173,9 +173,6 @@ bindsym $mod+r mode "resize"
 # i3-gaps
 gaps inner 6
 
-# set the first connected monitor as monitor variable
-exec --no-startup-id MONITOR=$(xrandr --query | grep -w connected | head -1 | cut -d" " -f1)
-
 #Application rules and assignments
 
 for_window [title="^Android Emulator -"] floating enable
@@ -186,5 +183,6 @@ for_window [class="jetbrains-studio" title="^win\d+$"] focus
 # exec --no-startup-id xbindkeys
 # exec --no-startup-id nm-applet
 exec --no-startup-id compton
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id feh --bg-fill $HOME/wallpapers/zelda_dark_forest.jpg
+exec --no-startup-id MONITOR=$(xrandr --query | grep -w connected | head -1 | cut -d" " -f1)
+exec --no-startup-id $HOME/.config/polybar/launch.sh
