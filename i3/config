@@ -35,12 +35,13 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+m         exec xrandr --output HDMI-0 --off
-bindsym $mod+shift+m   exec xrandr --output HDMI-0 --auto --primary --left-of eDP-1-1
+#bindsym $mod+m         exec xrandr --output HDMI-0 --off
+#bindsym $mod+shift+m   exec xrandr --output HDMI-0 --auto --primary --left-of eDP-1-1
 bindsym $mod+n move workspace to output left
 bindsym $mod+shift+n move workspace to output right
 
-
+bindsym $mod+m move workspace to output up
+bindsym $mod+shift+m move workspace to output down
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -combi-modi window#drun#ssh -theme solarized_alternate -show combi 
@@ -48,6 +49,12 @@ bindsym $mod+d exec rofi -combi-modi window#drun#ssh -theme solarized_alternate 
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # change focus
 bindsym $mod+j focus left
@@ -83,18 +90,18 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+#bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child

@@ -9,3 +9,5 @@ else
 	xrandr --delmonitor DP-0~2
 	xrandr --delmonitor DP-0~3
 fi
+
+source ~/dotfiles/polybar/launch.sh

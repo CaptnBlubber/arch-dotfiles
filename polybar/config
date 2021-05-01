@@ -15,7 +15,7 @@ module-margin = 4
 
 font-0 = "Hack Nerd Font:pixelsize=12;0"
 font-1 = MaterialIcons:size=10;0
-font-2 = Termsynu:size=8:antialias=false;-2
+font-2 = NotoSans:size=12:antialias=false;0
 font-3 = FontAwesome:size=10;0
 
 modules-left = powermenu
